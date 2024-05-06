@@ -13,6 +13,8 @@ namespace ControleMedicamentos.ConsoleApp
     {
         static void Main(string[] args)
         {
+            #region Paciente
+
             RepositorioPaciente repositorioPaciente = new RepositorioPaciente();
 
             TelaPaciente telaPaciente = new TelaPaciente();
@@ -20,12 +22,17 @@ namespace ControleMedicamentos.ConsoleApp
             telaPaciente.repositorio = repositorioPaciente;
 
             telaPaciente.CadastrarEntidadeTeste();
+            #endregion
+
+            #region Fornecedor
             RepositorioFornecedor repositorioFornecedor = new RepositorioFornecedor();
 
             TelaFornecedor telaFornecedor = new TelaFornecedor();
             telaFornecedor.repositorio = repositorioFornecedor;
             telaFornecedor.tipoEntidade = "Fornecedor";
+            #endregion
 
+            #region Medicamento
             RepositorioMedicamento repositorioMedicamento = new RepositorioMedicamento();
             TelaMedicamento telaMedicamento = new TelaMedicamento();
             telaMedicamento.repositorio = repositorioMedicamento;
@@ -34,6 +41,9 @@ namespace ControleMedicamentos.ConsoleApp
             telaMedicamento.telafornecedor = telaFornecedor;
             telaMedicamento.repositorioFornecedor = repositorioFornecedor;
 
+            #endregion
+
+            #region Requisição Saida
             RepositorioRequisicaoSaida repositorioRequisicaoSaida = new RepositorioRequisicaoSaida();
 
             TelaRequisicaoSaida telaRequisicaoSaida = new TelaRequisicaoSaida();
@@ -45,19 +55,30 @@ namespace ControleMedicamentos.ConsoleApp
 
             telaRequisicaoSaida.repositorioPaciente = repositorioPaciente;
             telaRequisicaoSaida.repositorioMedicamento = repositorioMedicamento;
+            #endregion
 
+            #region Funcionario
             RepositorioFuncionario repositorioFuncionario = new RepositorioFuncionario();
 
             TelaFuncionario telaFuncionario = new TelaFuncionario();
             telaFuncionario.tipoEntidade = "Funcionário";
             telaFuncionario.repositorio = repositorioFuncionario;
-          
-           
+            #endregion
+
+            #region Requisição Entrada
             
             RepositorioRequisicaoEntrada repositorioRequisicaoEntrada = new RepositorioRequisicaoEntrada();
+          
             TelaRequisicaoEntrada telaRequisicaoEntrada = new TelaRequisicaoEntrada();
             telaRequisicaoEntrada.tipoEntidade = "Requisição de Entrada";
             telaRequisicaoEntrada.repositorio = repositorioRequisicaoEntrada;
+
+            telaRequisicaoEntrada.telaMedicamento = telaMedicamento;
+            telaRequisicaoEntrada.telaFuncionario = telaFuncionario;
+
+            telaRequisicaoEntrada.repositorioMedicamento = repositorioMedicamento;
+            telaRequisicaoEntrada.repositorioFuncionario = repositorioFuncionario;
+            #endregion
 
             while (true)
             {

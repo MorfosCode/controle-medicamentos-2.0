@@ -14,14 +14,14 @@ namespace ControleMedicamentos.ConsoleApp.ModuloMedicamento
         public int Quantidade { get; set; } 
 
 
-        public Medicamento(string nome, string descricao, string lote, DateTime dataValidade, Fornecedor fornecedor, int Quantidade)
+        public Medicamento(string nome, string descricao, string lote, DateTime dataValidade, Fornecedor fornecedor, int quantidade)
         {
             Nome = nome;
             Descricao = descricao;
             Lote = lote;
             DataValidade = dataValidade;
             Fornecedor = fornecedor;
-            this.Quantidade = Quantidade;
+           Quantidade = quantidade;
         }
 
         public override string[] Validar()

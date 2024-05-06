@@ -62,11 +62,11 @@ namespace ControleMedicamentos.ConsoleApp.ModuloMedicamento
             Console.Write("Digite o ID do Fornecedor da medicação: ");
             int idFornecedor = Convert.ToInt32(Console.ReadLine());
 
-            Fornecedor fornecedorSelecinado = (Fornecedor)repositorioFornecedor.SelecionarPorId(idFornecedor);
+            Fornecedor fornecedor = (Fornecedor)repositorioFornecedor.SelecionarPorId(idFornecedor);
 
 
 
-            Medicamento medicamento = new Medicamento(nome, descricao, lote, dataValidade, idFornecedor,quantidade);
+            Medicamento medicamento = new Medicamento(nome, descricao, lote, dataValidade, fornecedor,quantidade);
 
             return medicamento;
         }

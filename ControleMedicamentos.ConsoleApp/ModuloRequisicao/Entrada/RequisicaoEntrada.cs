@@ -10,21 +10,47 @@ namespace ControleMedicamentos.ConsoleApp.ModuloRequisicao.Entrada
 {
     internal class RequisicaoEntrada : EntidadeBase
     {
+
         public Medicamento medicamento { get; set; }
 
         public Funcionario funcionario { get; set; }
         public DateTime DataRequisicao { get; set; }
         public int QuantidadeEntrada { get; set; }
 
-        public override string[] Validar()
+
+        public RequisicaoEntrada(Medicamento medicamento, Funcionario funcionario, int quantidade)
         {
-            throw new NotImplementedException();
+            this.medicamento = medicamento;
+            this.funcionario = funcionario;
+            QuantidadeEntrada = quantidade;
+
+            DataRequisicao = DateTime.Now;
         }
 
-        public bool EntradaMedicamento()
+        public override string[] Validar()
         {
-            Medicamento.Quantidade += QuantidadeEntrada;
-            return true;
+            string[] erros = new string[3];
+            int contadorErros = 0;
+
+            if (medicamento == null)
+                erros[contadorErros++] = "O medicamento precisa ser preenchido";
+
+            if (funcionario == null)
+                erros[contadorErros++] = "O funcionario precisa ser informado";
+
+            if (QuantidadeEntrada < 1)
+                erros[contadorErros++] = "Por favor informe uma quantidade válida";
+
+            string[] errosFiltrados = new string[contadorErros];
+
+            Array.Copy(erros, errosFiltrados, contadorErros);
+
+            return errosFiltrados;
+        }
+
+        public void EntradaMedicamento()
+        {
+            medicamento.Quantidade += QuantidadeEntrada;
         }
     }
 }

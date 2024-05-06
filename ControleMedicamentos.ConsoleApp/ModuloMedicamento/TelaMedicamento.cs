@@ -1,9 +1,13 @@
 ﻿using ControleMedicamentos.ConsoleApp.Compartilhado;
+using ControleMedicamentos.ConsoleApp.ModuloFornecedor;
 
 namespace ControleMedicamentos.ConsoleApp.ModuloMedicamento
 {
     internal class TelaMedicamento : TelaBase
     {
+        public TelaFornecedor telafornecedor = null;
+        public RepositorioFornecedor repositorioFornecedor = null;
+
         public override void VisualizarRegistros(bool exibirTitulo)
         {
             if (exibirTitulo)
@@ -16,8 +20,8 @@ namespace ControleMedicamentos.ConsoleApp.ModuloMedicamento
             Console.WriteLine();
 
             Console.WriteLine(
-                "{0, -10} | {1, -20} | {2, -20}",
-                "Id", "nomeFuncionario", "Quantidade"
+                "{0, -10} | {1, -20} | {2, -20} | {3, -20}",
+                "Id", "Nome uncionario", "Fornecedor","Quantidade"
             );
 
             EntidadeBase[] medicamentosCadastrados = repositorio.SelecionarTodos();
@@ -29,7 +33,7 @@ namespace ControleMedicamentos.ConsoleApp.ModuloMedicamento
 
                 Console.WriteLine(
                     "{0, -10} | {1, -20} | {2, -20}",
-                    medicamento.Id, medicamento.Nome, medicamento.Quantidade
+                    medicamento.Id, medicamento.Nome, medicamento.Fornecedor, medicamento.Quantidade
                 );
             }
 
@@ -51,7 +55,18 @@ namespace ControleMedicamentos.ConsoleApp.ModuloMedicamento
             Console.Write("Digite a data de validade: ");
             DateTime dataValidade = Convert.ToDateTime(Console.ReadLine());
 
-            Medicamento medicamento = new Medicamento(nome, descricao, lote, dataValidade);
+            Console.Write("Digite a quantidade disponivel do medicamento: ");
+            int quantidade = Convert.ToInt32(Console.ReadLine());
+
+            telafornecedor.VisualizarRegistros(false);
+            Console.Write("Digite o ID do Fornecedor da medicação: ");
+            int idFornecedor = Convert.ToInt32(Console.ReadLine());
+
+            Fornecedor fornecedorSelecinado = (Fornecedor)repositorioFornecedor.SelecionarPorId(idFornecedor);
+
+
+
+            Medicamento medicamento = new Medicamento(nome, descricao, lote, dataValidade, idFornecedor,quantidade);
 
             return medicamento;
         }

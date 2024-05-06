@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ControleMedicamentos.ConsoleApp.Compartilhado;
 
-namespace ControleMedicamentos.ConsoleApp.ModuloRequisicaoEntrada
+namespace ControleMedicamentos.ConsoleApp.ModuloRequisicao.Entrada
 {
     internal class RepositorioRequisicaoEntrada : RepositorioBase
     {

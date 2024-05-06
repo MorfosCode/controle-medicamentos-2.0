@@ -1,20 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ControleMedicamentos.ConsoleApp.Compartilhado;
+using ControleMedicamentos.ConsoleApp.ModuloFornecedor;
+using ControleMedicamentos.ConsoleApp.ModuloFuncionario;
 using ControleMedicamentos.ConsoleApp.ModuloMedicamento;
 using ControleMedicamentos.ConsoleApp.ModuloPaciente;
 
-namespace ControleMedicamentos.ConsoleApp.ModuloRequisicaoEntrada
+namespace ControleMedicamentos.ConsoleApp.ModuloRequisicao.Entrada
 {
     internal class RequisicaoEntrada : EntidadeBase
     {
-        public Medicamento Medicamento { get; set; }
-        //public Fornecedor fornecedor { get; set; }
+        public Medicamento medicamento { get; set; }
+
+        public Funcionario funcionario { get; set; }
         public DateTime DataRequisicao { get; set; }
-        public int QuantidadeRetirada { get; set; }
+        public int QuantidadeEntrada { get; set; }
 
         public override string[] Validar()
         {
@@ -23,10 +23,7 @@ namespace ControleMedicamentos.ConsoleApp.ModuloRequisicaoEntrada
 
         public bool EntradaMedicamento()
         {
-            if (Medicamento.Quantidade < QuantidadeRetirada)
-                return false;
-
-            Medicamento.Quantidade -= QuantidadeRetirada;
+            Medicamento.Quantidade += QuantidadeEntrada;
             return true;
         }
     }

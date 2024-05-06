@@ -26,11 +26,11 @@ namespace ControleMedicamentos.ConsoleApp.ModuloMedicamento
 
         public override string[] Validar()
         {
-            string[] erros = new string[3];
+            string[] erros = new string[5];
             int contadorErros = 0;
 
             if (string.IsNullOrEmpty(Nome.Trim()))
-                erros[contadorErros++] = ("O campo \"nomeFuncionario\" é obrigatório");
+                erros[contadorErros++] = ("O campo \"ome\" é obrigatório");
 
             if (string.IsNullOrEmpty(Descricao.Trim()))
                 erros[contadorErros++] = ("O campo \"descrição\" é obrigatório");

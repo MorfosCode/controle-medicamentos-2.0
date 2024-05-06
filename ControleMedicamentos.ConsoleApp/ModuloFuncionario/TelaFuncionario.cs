@@ -23,7 +23,7 @@ namespace ControleMedicamentos.ConsoleApp.ModuloFuncionario
 
             Console.WriteLine(
                 "{0, -10} | {1, -15} | {2, -15} | {3, -15}",
-                "Id", "nomeFuncionario", "Telefone", "CPF"
+                "Id", "Funcionario", "Telefone", "CPF"
             );
 
             EntidadeBase[] funcionariosCadastrados = repositorio.SelecionarTodos();
@@ -57,6 +57,12 @@ namespace ControleMedicamentos.ConsoleApp.ModuloFuncionario
             Funcionario novoFuncionario = new Funcionario(nome, telefone, cpf);
 
             return novoFuncionario;
+        }
+        public void CadastrarEntidadeTeste()
+        {
+            Funcionario funcionario = new Funcionario("Eduardo Augusto", "49 9999-9521", "12321313122");
+
+            repositorio.Cadastrar(funcionario);
         }
     }
 }

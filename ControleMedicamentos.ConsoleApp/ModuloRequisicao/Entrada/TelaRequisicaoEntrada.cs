@@ -69,8 +69,8 @@ namespace ControleMedicamentos.ConsoleApp.ModuloRequisicao.Entrada
                     "{0, -10} | {1, -15} | {2, -15} | {3, -20} | {4, -5}",
                     requisicao.Id,
                     requisicao.DataRequisicao.ToString(),
-                    requisicao.medicamento,
-                    requisicao.funcionario,
+                    requisicao.medicamento.Nome,
+                    requisicao.funcionario.nomeFuncionario,
                     requisicao.QuantidadeEntrada
                 );
             }
@@ -81,6 +81,7 @@ namespace ControleMedicamentos.ConsoleApp.ModuloRequisicao.Entrada
 
         protected override EntidadeBase ObterRegistro()
         {
+            telaMedicamento.VisualizarRegistros(false);
             Console.Write("Digite o ID do medicamento requisitado: ");
             int idMedicamento = Convert.ToInt32(Console.ReadLine());
 
@@ -92,8 +93,6 @@ namespace ControleMedicamentos.ConsoleApp.ModuloRequisicao.Entrada
             int idFuncionario = Convert.ToInt32(Console.ReadLine());
 
             Funcionario funcionario = (Funcionario)repositorioFuncionario.SelecionarPorId(idFuncionario);
-
-            telaMedicamento.VisualizarRegistros(false);
 
             Console.Write("Digite a quantidade do medicamente que deseja registrar: ");
             int quantidade = Convert.ToInt32(Console.ReadLine());

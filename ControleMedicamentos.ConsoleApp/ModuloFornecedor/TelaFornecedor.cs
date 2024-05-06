@@ -1,4 +1,5 @@
 ﻿using ControleMedicamentos.ConsoleApp.Compartilhado;
+using ControleMedicamentos.ConsoleApp.ModuloPaciente;
 
 namespace ControleMedicamentos.ConsoleApp.ModuloFornecedor
 {
@@ -47,6 +48,12 @@ namespace ControleMedicamentos.ConsoleApp.ModuloFornecedor
 
             Fornecedor fornecedor = new Fornecedor(nome, telefone, cnpj);
             return fornecedor;
+        }
+        public void CadastrarEntidadeTeste()
+        {
+            Fornecedor fornecedor = new Fornecedor  ("Medley", "49 9999-9521", "0151456215615614652");
+
+            repositorio.Cadastrar(fornecedor);
         }
     }
 }

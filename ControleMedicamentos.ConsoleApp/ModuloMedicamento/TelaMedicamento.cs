@@ -1,5 +1,6 @@
 ﻿using ControleMedicamentos.ConsoleApp.Compartilhado;
 using ControleMedicamentos.ConsoleApp.ModuloFornecedor;
+using ControleMedicamentos.ConsoleApp.ModuloPaciente;
 
 namespace ControleMedicamentos.ConsoleApp.ModuloMedicamento
 {
@@ -21,7 +22,7 @@ namespace ControleMedicamentos.ConsoleApp.ModuloMedicamento
 
             Console.WriteLine(
                 "{0, -10} | {1, -20} | {2, -20} | {3, -20}",
-                "Id", "Nome uncionario", "Fornecedor","Quantidade"
+                "Id", "Medicamento", "Fornecedor", "Quantidade"
             );
 
             EntidadeBase[] medicamentosCadastrados = repositorio.SelecionarTodos();
@@ -33,7 +34,7 @@ namespace ControleMedicamentos.ConsoleApp.ModuloMedicamento
 
                 Console.WriteLine(
                     "{0, -10} | {1, -20} | {2, -20}",
-                    medicamento.Id, medicamento.Nome, medicamento.Fornecedor, medicamento.Quantidade
+                    medicamento.Id, medicamento.Nome, medicamento.Fornecedor.Nome, medicamento.Quantidade
                 );
             }
 
@@ -43,7 +44,7 @@ namespace ControleMedicamentos.ConsoleApp.ModuloMedicamento
 
         protected override EntidadeBase ObterRegistro()
         {
-            Console.Write("Digite o nomeFuncionario: ");
+            Console.Write("Digite o Medicamento: ");
             string nome = Console.ReadLine();
 
             Console.Write("Digite a descrição: ");
@@ -55,18 +56,17 @@ namespace ControleMedicamentos.ConsoleApp.ModuloMedicamento
             Console.Write("Digite a data de validade: ");
             DateTime dataValidade = Convert.ToDateTime(Console.ReadLine());
 
-            Console.Write("Digite a quantidade disponivel do medicamento: ");
-            int quantidade = Convert.ToInt32(Console.ReadLine());
-
             telafornecedor.VisualizarRegistros(false);
             Console.Write("Digite o ID do Fornecedor da medicação: ");
             int idFornecedor = Convert.ToInt32(Console.ReadLine());
 
             Fornecedor fornecedor = (Fornecedor)repositorioFornecedor.SelecionarPorId(idFornecedor);
 
+            Console.Write("Digite a quantidade disponivel do medicamento: ");
+            int quantidade = Convert.ToInt32(Console.ReadLine());
 
 
-            Medicamento medicamento = new Medicamento(nome, descricao, lote, dataValidade, fornecedor,quantidade);
+            Medicamento medicamento = new Medicamento(nome, descricao, lote, dataValidade, fornecedor, quantidade);
 
             return medicamento;
         }

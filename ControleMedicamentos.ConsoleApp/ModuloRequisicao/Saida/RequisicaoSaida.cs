@@ -1,6 +1,7 @@
 ﻿using ControleMedicamentos.ConsoleApp.Compartilhado;
 using ControleMedicamentos.ConsoleApp.ModuloMedicamento;
 using ControleMedicamentos.ConsoleApp.ModuloPaciente;
+using System.Collections;
 
 namespace ControleMedicamentos.ConsoleApp.ModuloRequisicao.Saida
 {
@@ -20,26 +21,20 @@ namespace ControleMedicamentos.ConsoleApp.ModuloRequisicao.Saida
             DataRequisicao = DateTime.Now;
             QuantidadeRetirada = quantidade;
         }
-
-        public override string[] Validar()
+        public override ArrayList Validar()
         {
-            string[] erros = new string[3];
-            int contadorErros = 0;
+            ArrayList erros = new ArrayList();
 
             if (Medicamento == null)
-                erros[contadorErros++] = "O medicamento precisa ser preenchido";
+                erros.Add("O medicamento precisa ser preenchido");
 
             if (Paciente == null)
-                erros[contadorErros++] = "O paciente precisa ser informado";
+                erros.Add("O paciente precisa ser informado");
 
             if (QuantidadeRetirada < 1)
-                erros[contadorErros++] = "Por favor informe uma quantidade válida";
+                erros.Add("Por favor informe uma quantidade válida");
 
-            string[] errosFiltrados = new string[contadorErros];
-
-            Array.Copy(erros, errosFiltrados, contadorErros);
-
-            return errosFiltrados;
+            return erros;
         }
 
         public bool RetirarMedicamento()
@@ -49,6 +44,15 @@ namespace ControleMedicamentos.ConsoleApp.ModuloRequisicao.Saida
 
             Medicamento.Quantidade -= QuantidadeRetirada;
             return true;
+        }
+
+        public override void AtualizarRegistro(EntidadeBase novoregistro)
+        {
+            RequisicaoSaida Saida = (RequisicaoSaida)novoregistro;
+            this.Medicamento = Saida.Medicamento;
+            this.Paciente = Saida.Paciente;
+            this.DataRequisicao = Saida.DataRequisicao;
+            this.QuantidadeRetirada = Saida.QuantidadeRetirada;
         }
     }
 }

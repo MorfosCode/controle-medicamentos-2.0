@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using ControleMedicamentos.ConsoleApp.Compartilhado;
 using ControleMedicamentos.ConsoleApp.ModuloFornecedor;
@@ -27,7 +28,7 @@ namespace ControleMedicamentos.ConsoleApp.ModuloRequisicao.Entrada
             DataRequisicao = DateTime.Now;
         }
 
-        public override string[] Validar()
+        public override ArrayList Validar()
         {
             string[] erros = new string[3];
             int contadorErros = 0;

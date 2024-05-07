@@ -1,4 +1,6 @@
-﻿namespace ControleMedicamentos.ConsoleApp.Compartilhado
+﻿using System.Collections;
+
+namespace ControleMedicamentos.ConsoleApp.Compartilhado
 {
     internal abstract class TelaBase
     {
@@ -40,9 +42,9 @@
 
             EntidadeBase entidade = ObterRegistro();
 
-            string[] erros = entidade.Validar();
+            ArrayList erros = entidade.Validar();
 
-            if (erros.Length > 0)
+            if (erros.Count > 0)
             {
                 ApresentarErros(erros);
                 return;
@@ -76,13 +78,14 @@
 
             EntidadeBase entidade = ObterRegistro();
 
-            string[] erros = entidade.Validar();
+            ArrayList erros = entidade.Validar();
 
-            if (erros.Length > 0)
+            if (erros.Count > 0)
             {
                 ApresentarErros(erros);
                 return;
             }
+
 
             bool conseguiuEditar = repositorio.Editar(idEntidadeEscolhida, entidade);
 
@@ -127,11 +130,11 @@
 
         public abstract void VisualizarRegistros(bool exibirTitulo);
 
-        protected void ApresentarErros(string[] erros)
+        protected void ApresentarErros(ArrayList erros)
         {
             Console.ForegroundColor = ConsoleColor.Red;
 
-            for (int i = 0; i < erros.Length; i++)
+            for (int i = 0; i < erros.Count; i++)
                 Console.WriteLine(erros[i]);
 
             Console.ResetColor();

@@ -1,6 +1,7 @@
 ﻿using ControleMedicamentos.ConsoleApp.Compartilhado;
 using ControleMedicamentos.ConsoleApp.ModuloMedicamento;
 using ControleMedicamentos.ConsoleApp.ModuloPaciente;
+using System.Collections;
 
 namespace ControleMedicamentos.ConsoleApp.ModuloRequisicao.Saida
 {
@@ -21,10 +22,9 @@ namespace ControleMedicamentos.ConsoleApp.ModuloRequisicao.Saida
             Console.WriteLine();
 
             RequisicaoSaida entidade = (RequisicaoSaida)ObterRegistro();
+            ArrayList erros = entidade.Validar();
 
-            string[] erros = entidade.Validar();
-
-            if (erros.Length > 0)
+            if (erros.Count > 0)
             {
                 ApresentarErros(erros);
                 return;
@@ -39,8 +39,9 @@ namespace ControleMedicamentos.ConsoleApp.ModuloRequisicao.Saida
             }
 
             repositorio.Cadastrar(entidade);
-
             ExibirMensagem($"O {tipoEntidade} foi cadastrado com sucesso!", ConsoleColor.Green);
+
+
         }
 
         public override void VisualizarRegistros(bool exibirTitulo)
@@ -57,9 +58,7 @@ namespace ControleMedicamentos.ConsoleApp.ModuloRequisicao.Saida
             Console.WriteLine(
                 "{0, -10} | {1, -15} | {2, -15} | {3, -20} | {4, -5}",
                 "Id", "Medicamento", "Paciente", "Data de Requisição", "Quantidade"
-            );
-
-            EntidadeBase[] requisicoesCadastradas = repositorio.SelecionarTodos();
+            ); ArrayList requisicoesCadastradas = repositorio.SelecionarTodos();
 
             foreach (RequisicaoSaida requisicao in requisicoesCadastradas)
             {
@@ -75,7 +74,6 @@ namespace ControleMedicamentos.ConsoleApp.ModuloRequisicao.Saida
                     requisicao.QuantidadeRetirada
                 );
             }
-
             Console.ReadLine();
             Console.WriteLine();
         }

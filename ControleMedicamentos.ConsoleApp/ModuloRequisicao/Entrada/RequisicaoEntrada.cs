@@ -6,6 +6,7 @@ using ControleMedicamentos.ConsoleApp.ModuloFornecedor;
 using ControleMedicamentos.ConsoleApp.ModuloFuncionario;
 using ControleMedicamentos.ConsoleApp.ModuloMedicamento;
 using ControleMedicamentos.ConsoleApp.ModuloPaciente;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ControleMedicamentos.ConsoleApp.ModuloRequisicao.Entrada
 {
@@ -30,28 +31,29 @@ namespace ControleMedicamentos.ConsoleApp.ModuloRequisicao.Entrada
 
         public override ArrayList Validar()
         {
-            string[] erros = new string[3];
-            int contadorErros = 0;
+
+            ArrayList erros = new ArrayList();
 
             if (medicamento == null)
-                erros[contadorErros++] = "O medicamento precisa ser preenchido";
+                erros.Add = "O medicamento precisa ser preenchido";
 
             if (funcionario == null)
-                erros[contadorErros++] = "O funcionario precisa ser informado";
+                eerros.Add = "O funcionario precisa ser informado";
 
             if (QuantidadeEntrada < 1)
-                erros[contadorErros++] = "Por favor informe uma quantidade válida";
+                erros.Add = "Por favor informe uma quantidade válida";
 
-            string[] errosFiltrados = new string[contadorErros];
-
-            Array.Copy(erros, errosFiltrados, contadorErros);
-
-            return errosFiltrados;
+            return erros;
         }
 
         public void EntradaMedicamento()
         {
             medicamento.Quantidade += QuantidadeEntrada;
+        }
+
+        public override void AtualizarRegistro(EntidadeBase novoregistro)
+        {
+            throw new NotImplementedException();
         }
     }
 }
